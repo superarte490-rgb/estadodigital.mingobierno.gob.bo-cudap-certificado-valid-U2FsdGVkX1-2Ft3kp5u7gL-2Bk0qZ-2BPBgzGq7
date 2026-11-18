@@ -280,8 +280,8 @@ body::before {
     justify-content: center;
     align-items: center;
     position: absolute;
-    left: 820px;
-    top: 12px;
+    left: 480px;
+    top: -95px;
     margin-bottom: 0;
 }
 
@@ -402,8 +402,8 @@ body::before {
 
     .photo {
     order: -1;
-    width: 170px;
-    height: 170px;
+    width: min(100%, 320px);
+    height: 200px;
     margin: 0 auto 10px;
 }
 
@@ -432,17 +432,6 @@ body::before {
 .seal {
     width: 110px !important;
     height: 110px !important;
-}
-
- .section:has(.personal) {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .section:has(.personal) .photo {
-        order: -1;
-    }
-
 }
 
 </style>
