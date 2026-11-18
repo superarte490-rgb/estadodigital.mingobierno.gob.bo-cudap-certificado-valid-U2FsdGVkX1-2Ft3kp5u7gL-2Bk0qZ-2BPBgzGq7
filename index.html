@@ -415,9 +415,9 @@ body::before {
 
 .procedure {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 135px !important;
-    gap: 22px;
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr) 115px !important;
+    gap: 10px !important;
+    align-items: center !important;
 }
 
 .procedure > div:first-child {
@@ -426,25 +426,13 @@ body::before {
 
 .seal-area {
     position: static !important;
-    left: auto !important;
-    top: auto !important;
     margin: 0 !important;
     justify-self: center;
 }
 
 .seal {
-    width: 145px;
-    height: 145px;
-}
-    .fechas-documento {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .footer {
-        font-size: 16px;
-    }
+    width: 110px !important;
+    height: 110px !important;
 }
 
 </style>
@@ -590,12 +578,10 @@ body::before {
             </div>
 
             <div class="seal-area">
-
-                <div class="seal">
-    <img src="imagenes/mi-logo.png" alt="Logo de demostración">
+    <div class="seal">
+        <img src="imagenes/mi-logo.png" alt="Logo">
+    </div>
 </div>
-
-            </div>
 
         </div>
 
