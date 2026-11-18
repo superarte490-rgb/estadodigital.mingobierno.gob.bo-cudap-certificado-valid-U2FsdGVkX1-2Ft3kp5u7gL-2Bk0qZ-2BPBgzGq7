@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Certificado ÚNICO DIGITAL DE ANTECEDENTES POLICIALES</title>
+
+<style>
+
+/* ==============================
+   CONFIGURACIÓN GENERAL
+============================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #172a3c;
+
+    background-color: #ffffff;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.63),
+            rgba(255, 255, 255, 0.685)
+        ),
+        url("imagenes/fondo-demo.jpg");
+
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: cover, 50% auto;
+    background-attachment: fixed, fixed;
+}
+
+
+
+/* ==============================
+   FONDO BLANCO CON LETRAS
+   REPETIDAS EN DIAGONAL
+============================== */
+
+
+
+
+/* FONDO INDEPENDIENTE DEL CONTENIDO */
+body::before {
+    content: "";
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+
+    pointer-events: none;
+    z-index: 0;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='48' viewBox='0 0 1200 48'%3E%3Ctext x='0' y='29' font-family='Arial' font-size='11' font-weight='600' fill='%23444444' fill-opacity='.50' textLength='390' lengthAdjust='spacingAndGlyphs'%3EPOLICIA BOLIVIANA - MINISTERIO DE GOBIERNO -O%3C/text%3E%3Ctext x='400' y='29' font-family='Arial' font-size='11' font-weight='600' fill='%23444444' fill-opacity='.50' textLength='390' lengthAdjust='spacingAndGlyphs'%3EPOLICIA BOLIVIANA - MINISTERIO DE GOBIERNO -%3C/text%3E%3Ctext x='800' y='29' font-family='Arial' font-size='11' font-weight='600' fill='%23444444' fill-opacity='.50' textLength='390' lengthAdjust='spacingAndGlyphs'%3EPOLICIA BOLIVIANA - MINISTERIO DE GOBIERNO -%3C/text%3E%3C/svg%3E");
+
+    background-repeat: repeat;
+
+    background-size:
+        calc(1200px / var(--zoom-factor, 1))
+        calc(48px / var(--zoom-factor, 1));
+
+    transform: rotate(-18deg);
+}
+
+.topbar,
+.container {
+    position: relative;
+    z-index: 2;
+}
+
+
+.logo-fondo {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.logo-fondo img {
+    width: auto;
+    height: auto;
+    max-width: 25vw;
+    max-height: 15vh;
+    object-fit: contain;
+    opacity: 0.10;
+}
+
+
+body::before {
+    z-index: 1;
+}
+
+.topbar {
+    margin: 2px 17px;
+    min-height: 37px;
+    background: #078d3c;
+    color: white;
+    text-align: center;
+    padding: 9px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* ==============================
+   CONTENEDOR
+============================== */
+
+.container {
+    width: 100%;
+    max-width: 1080px;
+    margin: auto;
+    padding: 12px;
+}
+
+/* ==============================
+   ENCABEZADO
+============================== */
+
+.header {
+    text-align: center;
+    padding: 2px;
+}
+
+.logo-area {
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    line-height: 1;
+}
+
+.logo-texto {
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    margin: 0 0 3px;
+    line-height: 1.2;
+}
+
+.logo-area img {
+    width: 450px;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+    margin: -15px auto;
+}
+
+.system {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.organization {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 10px;
+}
+
+.main-title {
+    color: #08a65b;
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 12px 0 25px;
+}
+
+/* ==============================
+   AVISO DE DEMOSTRACIÓN
+============================== */
+
+.demo-notice {
+    display: inline-block;
+    color: #a02020;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+/* ==============================
+   SECCIONES
+============================== */
+
+.section {
+    border: 1px solid #aeb8b5;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 10px 20px;
+    margin: 45px 0 25px;
+    position: relative;
+}
+
+.section-title {
+    position: absolute;
+    top: -35px;
+    left: 0;
+    display: inline-block;
+    background: #078bd5;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* ==============================
+   DATOS PERSONALES
+============================== */
+
+.personal {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 25px;
+    align-items: center;
+}
+
+.data {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 25px;
+    row-gap: 16px;
+    font-size: 16px;
+}
+
+.field {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.field strong {
+    color: #e98b1a;
+}
+
+.photo {
+    width: 240px;
+    height: 200px;
+    border: 3px solid white;
+    background: rgba(235, 238, 235, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #69736e;
+    text-align: center;
+    font-size: 14px;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==============================
+   DETALLE DEL TRÁMITE
+============================== */
+
+.procedure {
+    min-height: 90px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px;
+    align-items: center;
+}
+
+.seal-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 480px;
+    top: -95px;
+    margin-bottom: -95px;
+}
+
+/* ==============================
+   SELLO DORADO DECORATIVO
+============================== */
+
+.seal {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.seal img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    animation: glow-logo 3s infinite;
+}
+
+.fechas-documento {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    margin: 15px 0;
+}
+
+.fechas-documento strong {
+    color: #e98b1a;
+}
+
+/* ==============================
+   ANIMACIÓN DEL RESPLANDOR
+============================== */
+
+@keyframes glow-logo {
+    0%, 65%, 100% {
+        filter: brightness(1)
+        drop-shadow(0 0 5px #d9a300);
+    }
+
+    75% {
+        filter: brightness(1.5)
+        drop-shadow(0 0 8px #ffcf25)
+        drop-shadow(0 0 18px #ffcf25)
+        drop-shadow(0 0 30px rgba(255, 190, 0, 0.9));
+    }
+
+    85% {
+        filter: brightness(1.3)
+        drop-shadow(0 0 10px #ffcc33)
+        drop-shadow(0 0 20px #ffcc33);
+    }
+}
+
+/* ==============================
+   PIE DE PÁGINA
+============================== */
+
+.footer {
+    text-align: center;
+    color: #e7a456;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ==============================
+   DISEÑO PARA CELULARES
+============================== */
+
+@media(max-width:650px) {
+
+    .container {
+        padding: 10px;
+    }
+
+    .personal {
+    grid-template-columns: 1fr;
+}
+
+.procedure {
+    grid-template-columns: minmax(0, 1fr) 150px;
+}
+
+.seal-area {
+    justify-content: flex-end;
+    padding: 0;
+}
+
+.seal {
+    width: 120px;
+    height: 120px;
+}
+
+    .data {
+        grid-template-columns: 1fr;
+    }
+
+    .photo {
+        margin: auto;
+    }
+
+    .main-title {
+        font-size: 22px;
+    }
+
+    .seal-area {
+        padding: 15px;
+    }
+
+    .section {
+        padding: 12px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- BARRA SUPERIOR -->
+
+<div class="topbar">
+    Código : <strong>26111717051542</strong>
+</div>
+
+<div class="container">
+
+    <!-- ENCABEZADO -->
+
+    <header class="header">
+        
+
+        <div class="logo-area">
+
+            <div class="logo-texto">
+            SISTEMA ED-1
+             </div>
+            <img src="imagenes/emblema.png" alt="Logo de demostración">
+        </div>
+
+       
+        <h1 class="main-title">
+            CERTIFICADO ÚNICO DIGITAL<br>
+            DE ANTECEDENTES POLICIALES
+        </h1>
+
+       </header>
+
+    <!-- DATOS PERSONALES -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Datos Personales
+        </div>
+
+        <div class="personal">
+
+            <div class="data">
+
+                <div class="field">
+                    <strong>Nombres y Apellidos:</strong>
+                    VICTOR LUNA CAMACHO
+                </div>
+
+                <div class="field">
+                    <strong>Documento:</strong>
+                    4560860
+                </div>
+
+                <div class="field">
+                    <strong>Fecha de Nacimiento:</strong>
+                    19/10/1976
+                </div>
+
+                <div class="field">
+                    <strong>Nacionalidad:</strong>
+                    BOLIVIANO
+                </div>
+
+                <div class="field">
+                    <strong>Lugar de Nacimiento:</strong>
+                    SANTA CRUZ-ANDRES IBAÑEZ-SANTA CRUZ DE LA SIERRA
+                </div>
+
+                <div class="field">
+                    <strong>Estado Civil:</strong>
+                    SOLTERO
+                </div>
+
+                <div class="field">
+                    <strong>Lugar de Expedición:</strong>
+                    SANTA CRUZ
+                </div>
+
+                <div class="field">
+                    <strong>Profesión:</strong>
+                    ING. COMERCIAL
+                </div>
+
+                <div class="field">
+                    <strong>Domicilio:</strong>
+                    C. REGIMINETO LANZA NRO. 184
+                </div>
+
+            </div>
+
+            <div class="photo">
+    <img src="imagenes/empleado.jpg" alt="Foto del empleado">
+</div>
+
+        </div>
+
+    </section>
+
+    <!-- DETALLE DEL TRÁMITE -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Detalle del Trámite
+        </div>
+
+        <div class="procedure">
+
+            <div>
+
+                <p>
+                    <strong style="color:#e98b1a">
+                        Motivo del Trámite:
+                    </strong>
+                    LABORAL
+                </p>
+
+                <p style="margin-top:35px">
+                    <strong style="color:#e98b1a">
+                        Destinatario:
+                    </strong>
+                    REMAX
+                </p>
+
+                <div class="fechas-documento">
+
+    <p>
+        <strong>Emisión:</strong>
+        17/11/2026
+    </p>
+
+    <p>
+        <strong>Validez:</strong>
+        16/12/2026
+    </p>
+                
+            </div>
+
+            <div class="seal-area">
+
+                <div class="seal">
+    <img src="imagenes/mi-logo.png" alt="Logo de demostración">
+</div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- INFORMACIÓN -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Información de Antecedentes
+        </div>
+
+        <p style="color:#e98b1a;font-size:13px">
+            INFORMACIÓN ILUSTRATIVA
+        </p>
+
+        <p style="font-size:12px">
+            NINGUNA OBSERVACIÓN
+        </p>
+
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer class="footer">
+        https://estadodigital.mingobierno.gob.bo/cudap
+    </footer>
+
+</div>
+
+<script>
+(function () {
+
+    const initialDPR = window.devicePixelRatio || 1;
+
+    function adjustBackground() {
+
+        const currentDPR = window.devicePixelRatio || 1;
+
+        const zoomFactor = currentDPR / initialDPR;
+
+        document.documentElement.style.setProperty(
+            '--zoom-factor',
+            zoomFactor
+        );
+    }
+
+    adjustBackground();
+
+    window.addEventListener('resize', adjustBackground);
+
+    window.matchMedia(
+        `(resolution: ${window.devicePixelRatio}dppx)`
+    ).addEventListener('change', adjustBackground);
+
+})();
+</script>
+
+</body>
+</html>
